@@ -1,0 +1,29 @@
+/bin/bash: /Users/reycas/Documents/CloudeCowork/Hacking/push-to-github.sh: Operation not permitted
+[2026-05-02 12:02:51] No changes to push.
+To https://github.com/TonoRey/hacking-path.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/TonoRey/hacking-path.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+[2026-05-02 12:06:50] ERROR: Push failed. Check log above.
+To https://github.com/TonoRey/hacking-path.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/TonoRey/hacking-path.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+[2026-05-02 12:07:47] ERROR: Push failed. Check log above.
+To https://github.com/TonoRey/hacking-path.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/TonoRey/hacking-path.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+[2026-05-02 12:08:22] ERROR: Push failed. Check log above.

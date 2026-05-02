@@ -363,11 +363,71 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
 
+<<<<<<< HEAD
     /* ── Responsive ── */
     @media (max-width: 640px) {
       .concept-row { grid-template-columns: 1fr; }
       .modules-grid { grid-template-columns: 1fr; }
       .tools-grid { grid-template-columns: 1fr; }
+=======
+    /* ── Responsive / Mobile ── */
+    @media (max-width: 640px) {
+      /* Layout */
+      .wrapper { padding: 0 14px 48px; }
+
+      /* Header */
+      .prompt-line { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      header h1 { font-size: 19px; }
+      header h1 .cursor { width: 9px; height: 15px; }
+      .tagline { font-size: 12px; }
+
+      /* Nav */
+      nav { gap: 6px; }
+      nav a { font-size: 12px; padding: 5px 10px; }
+
+      /* Section titles */
+      .section-title { font-size: 12px; }
+
+      /* Progress */
+      .progress-block { padding: 14px 16px; }
+      .progress-label { font-size: 13px; }
+      .progress-pct { font-size: 13px; }
+      .progress-detail { font-size: 12px; }
+
+      /* Week log */
+      .week-header { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .week-title { font-size: 13px; }
+      .week-items li { font-size: 13px; }
+
+      /* Module grid → single column */
+      .modules-grid { grid-template-columns: 1fr; }
+      .module-name { font-size: 14px; }
+      .module-desc { font-size: 12px; }
+
+      /* Concepts → stack all columns */
+      .concept-row { grid-template-columns: 1fr; gap: 6px; }
+      .concept-name { font-size: 13px; }
+      .concept-desc { font-size: 12px; }
+      .concept-tag { width: fit-content; }
+
+      /* Commands */
+      .cmd-code { font-size: 13px; word-break: break-all; }
+      .cmd-objective { font-size: 12px; }
+      .cmd-example { font-size: 12px; }
+
+      /* Tools → single column */
+      .tools-grid { grid-template-columns: 1fr; }
+      .tool-name { font-size: 14px; }
+      .tool-desc { font-size: 12px; }
+      .tool-url { font-size: 12px; }
+
+      /* Rules */
+      .rule-num { font-size: 15px; min-width: 22px; }
+      .rule-text { font-size: 13px; }
+
+      /* Footer */
+      footer { font-size: 11px; flex-direction: column; gap: 4px; }
+>>>>>>> 9f4dc92 (Initial commit - Week 1)
     }
   </style>
 </head>
