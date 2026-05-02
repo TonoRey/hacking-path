@@ -358,18 +358,103 @@
     }
     footer span { color: var(--green-dim); }
 
+    /* ── Password overlay ── */
+    #lock-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+    #lock-screen .lock-title {
+      font-size: 13px;
+      color: var(--green-dim);
+      letter-spacing: 0.1em;
+    }
+    #lock-screen .lock-title span { color: var(--green-hi); }
+    #lock-screen input {
+      background: var(--bg-card);
+      border: 1px solid var(--border-hi);
+      color: var(--green-hi);
+      font-family: 'Fira Code', monospace;
+      font-size: 15px;
+      padding: 10px 16px;
+      border-radius: 3px;
+      outline: none;
+      width: 280px;
+      text-align: center;
+      letter-spacing: 0.12em;
+    }
+    #lock-screen input:focus { border-color: var(--green-mid); }
+    #lock-screen input::placeholder { color: var(--text-muted); letter-spacing: 0.06em; }
+    #lock-screen .lock-btn {
+      background: transparent;
+      border: 1px solid var(--green-dim);
+      color: var(--green);
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      padding: 8px 24px;
+      border-radius: 3px;
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      transition: all 0.15s;
+    }
+    #lock-screen .lock-btn:hover { border-color: var(--green-hi); color: var(--green-hi); }
+    #lock-screen .lock-error {
+      font-size: 12px;
+      color: var(--red);
+      height: 16px;
+      letter-spacing: 0.06em;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60%  { transform: translateX(-8px); }
+      40%,80%  { transform: translateX(8px); }
+    }
+    .shake { animation: shake 0.4s ease; }
+
+    /* ── News section ── */
+    .news-list { display: flex; flex-direction: column; gap: 10px; }
+    .news-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border);
+      border-radius: 0 4px 4px 0;
+      padding: 14px 16px;
+      transition: border-color 0.15s;
+    }
+    .news-item:hover { background: var(--bg-hover); }
+    .news-item.critical { border-left-color: var(--red); }
+    .news-item.warning  { border-left-color: var(--amber); }
+    .news-item.info     { border-left-color: var(--green-dim); }
+    .news-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; flex-wrap: wrap; gap: 6px; }
+    .news-title { color: var(--green-hi); font-size: 14px; font-weight: 500; }
+    .news-item.critical .news-title { color: var(--red); }
+    .news-item.warning  .news-title { color: var(--amber); }
+    .news-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+    }
+    .badge-critical { background: #2a0a0a; color: var(--red); border: 1px solid var(--red-dim); }
+    .badge-warning  { background: #2a200a; color: var(--amber); border: 1px solid #4a3a10; }
+    .badge-info     { background: #0a1a0a; color: var(--green-dim); border: 1px solid var(--border-hi); }
+    .news-desc { color: var(--green-dim); font-size: 13px; line-height: 1.6; }
+    .news-meta { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+    .news-affects { font-size: 11px; color: var(--green-dim); margin-top: 4px; }
+    .news-affects strong { color: var(--green-mid); }
+    .news-empty { color: var(--text-muted); font-size: 13px; padding: 16px 0; }
+
     /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
 
-<<<<<<< HEAD
-    /* ── Responsive ── */
-    @media (max-width: 640px) {
-      .concept-row { grid-template-columns: 1fr; }
-      .modules-grid { grid-template-columns: 1fr; }
-      .tools-grid { grid-template-columns: 1fr; }
-=======
     /* ── Responsive / Mobile ── */
     @media (max-width: 640px) {
       /* Layout */
@@ -427,12 +512,20 @@
 
       /* Footer */
       footer { font-size: 11px; flex-direction: column; gap: 4px; }
->>>>>>> 9f4dc92 (Initial commit - Week 1)
     }
   </style>
 </head>
 <body>
-<div class="wrapper">
+
+<!-- PASSWORD LOCK SCREEN -->
+<div id="lock-screen">
+  <div class="lock-title"><span>antonio</span>@sec-lab:~$ authenticate</div>
+  <input type="password" id="pwd-input" placeholder="enter access key" autofocus />
+  <button class="lock-btn" onclick="checkPassword()">[ ENTER ]</button>
+  <div class="lock-error" id="lock-error"></div>
+</div>
+
+<div class="wrapper" id="main-content" style="display:none">
 
   <!-- HEADER -->
   <header>
@@ -450,6 +543,7 @@
     <a href="#tools">Tools</a>
     <a href="#rules">Ethics Rules</a>
     <a href="#log">Weekly Log</a>
+    <a href="#news">Security News</a>
   </nav>
 
   <!-- ── PROGRESS ── -->
@@ -820,6 +914,24 @@
 
   </section>
 
+  <!-- ── SECURITY NEWS ── -->
+  <section class="section" id="news">
+    <div class="section-title">Security News — Your Ecosystem</div>
+    <div class="news-list">
+
+      <div class="news-item info">
+        <div class="news-header">
+          <span class="news-title">Section activated — first update this Sunday</span>
+          <span class="news-badge badge-info">INFO</span>
+        </div>
+        <div class="news-desc">Every Sunday at 8:00 PM CST this section is updated with the latest security news affecting your devices and services: macOS, Alexa, Roku, Google, Banamex, Bancoppel, iOS, and more. Critical issues appear in red and require immediate action.</div>
+        <div class="news-meta"># Updated: 2026-05-02 · Next update: Sunday 20:00 CST</div>
+        <div class="news-affects"><strong>Monitored:</strong> macOS · iOS · Alexa · Roku · Google · Banamex · Bancoppel · Chrome · Bitwarden · GitHub</div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div># antonio@sec-lab · path_start: 2025-05-01 · target: 2026-05-01</div>
@@ -827,5 +939,37 @@
   </footer>
 
 </div>
+
+<script>
+  // SHA-256 hash of the access password (never stored in plaintext)
+  const HASH = 'ff46fa618ecc5ace097e1e2bdf432afda98c25a056bb5a0077602c15b12d65b7';
+
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function checkPassword() {
+    const input = document.getElementById('pwd-input').value;
+    const hash  = await sha256(input);
+    if (hash === HASH) {
+      document.getElementById('lock-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+    } else {
+      const el = document.getElementById('lock-error');
+      el.textContent = '// access denied';
+      const inp = document.getElementById('pwd-input');
+      inp.classList.add('shake');
+      inp.value = '';
+      setTimeout(() => { inp.classList.remove('shake'); el.textContent = ''; }, 800);
+    }
+  }
+
+  // Allow Enter key to submit
+  document.getElementById('pwd-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') checkPassword();
+  });
+</script>
+
 </body>
 </html>
