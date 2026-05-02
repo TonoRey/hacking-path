@@ -12,8 +12,7 @@ cd "$REPO_DIR" || { echo "[$TIMESTAMP] ERROR: Could not cd to $REPO_DIR" >> "$LO
 git config user.email "antonioreyesnava@gmail.com"
 git config user.name "TonoRey"
 
-# Set remote with token (in case it needs refreshing)
-git remote set-url origin https://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@github.com/TonoRey/hacking-path.git 2>/dev/null
+# Credentials stored in macOS Keychain — no token needed here
 
 # Check if there are changes to push
 if git diff --quiet HEAD -- index.html 2>/dev/null && git diff --cached --quiet -- index.html 2>/dev/null; then
